@@ -55,15 +55,16 @@ int main(void) {
     // digital I/O settings
     TRISBbits.TRISB4 = 1; // B4 (pin 11) - with USER button and pullup resistor - is input 
     TRISAbits.TRISA4 = 0; // A4 (pin 12) with green LED is output
-    LATAbits.LATA4 = 1;   // A4 starts high
+    LATAbits.LATA4 = 0;   // A4 starts low (so that button push produces obvious off response)
     
     __builtin_enable_interrupts();
 
     while(1) {
-     /*   _CP0_SET_COUNT(0);
-        while(_CP0_GET_COUNT() < 12000) {;}
-        LATAbits.LATA4 = !LATAbits.LATA4; */
-	// use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
-	// remember the core timer runs at half the sysclk
+        _CP0_SET_COUNT(0);
+        LATAbits.LATA4 = !LATAbits.LATA4; 
+        while(_CP0_GET_COUNT() < 12000) {;} // wait 0.5 ms
+        LATAbits.LATA4 = !LATAbits.LATA4; 
+        while(_CP0_GET_COUNT() < 24000) {;} // wait another 0.5 ms
+        while(!PORTBbits.RB4) {;} // if USER button pushed, stop toggling
     }
 }
