@@ -1,5 +1,5 @@
-#include<xc.h>           // processor SFR definitions
-#include<sys/attribs.h>  // __ISR macro
+#include <xc.h>           // processor SFR definitions
+#include <sys/attribs.h>  // __ISR macro
 #include <math.h>        // math library, to have sin function
 
 
@@ -40,27 +40,29 @@
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
 
-/* Other Definitions*/
-#define CS LATBbits.LATB8 //chip select pin for DAC 
+/* Other Definitions */
+#define CS LATBbits.LATB7 // chip select pin for the DAC 
 
 
-/* Functions */
+/* Helper Function Prototypes */
+unsigned char spi_io(unsigned char);  // send a byte via SPI
+void spi_init(void);                  // initiate SPI1
+void setVoltage(char, int);           // set voltage value to send to DAC
+
+
+/* Main Function */
 int main(void) {
-
     __builtin_disable_interrupts();
-
     // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
     __builtin_mtc0(_CP0_CONFIG, _CP0_CONFIG_SELECT, 0xa4210583);
-
     // 0 data RAM access wait states
     BMXCONbits.BMXWSDRM = 0x0;
-
     // enable multi vector interrupts
     INTCONbits.MVEC = 0x1;
-
     // disable JTAG to get pins back
     DDPCONbits.JTAGEN = 0;
 
+    spi_init();
     __builtin_enable_interrupts();
 
     int i = 0; 
@@ -68,23 +70,61 @@ int main(void) {
     while(1) {
         _CP0_SET_COUNT(0);
        
-        float f = 512.0 + 512.0*sin((i*2.0*3.14/1000.0)*10.0);
-        i++;
+        /*float f = 512.0 + 512.0*sin((i*2.0*3.14/1000.0)*10.0);
+        i++;*/
         
-        //setVoltage stuff
+        setVoltage(0,512); // test: 1.65 V on Channel A
         
         while(_CP0_GET_COUNT() < 48000) {;} // wait 1 ms
-        
     }
+    return 0;
+}
+
+
+/* Helper Functions */
+unsigned char spi_io(unsigned char read) {
+    SPI1BUF = read;                       // send the command
+    while(!SPI1STATbits.SPIRBF) {Nop();}  // wait for the response
+    SPI1BUF;                              // garbage was transferred (old val), ignore it
+    SPI1BUF = 5;                          // write garbage, but the read will have the data
+    while (!SPI1STATbits.SPIRBF) {Nop();}
+    return SPI1BUF;
 }
 
 void spi_init() {
-    //TRISAbits.TRISA0 = 0;
-    //CS = 1;
-    //
+    // Pin Function Selections
+    SDI1Rbits.SDI1R = 0b0100; // pin B8 for SDI1
+    RPA1Rbits.RPA1R = 0b0011; // pin A1 for SDO1
+    RPB7Rbits.RPB7R = 0b0011; // pin B7 for SS1
+    
+    // set chosen CS pin as output
+    // to indicate to DAC when command is beginning (cleared lo) and ending (set hi)
+    TRISBbits.TRISB7 = 0;
+    CS = 1;  // no command given at startup
+    
+    // SPI initialization for DAC chip
+    SPI1CON = 0;                        // turn off and reset SPI1 module
+    SPI1BUF;                            // clear the rx buffer by reading it
+    SPI1BRG = 0x1;                      // set bit rate to less than 20 MHz: 48/2*(_1_+1) = 12 MHz
+    SPI1STATbits.SPIROV = 0;            // clear the overflow bit
+    SPI1CONbits.CKE = 1;                // data changes when clocks goes hi to lo (since CKP = 0)
+    SPI1CONbits.MSTEN = 1;              // master mode
+    SPI1CONbits.ON = 1;                 // turn SPI on
 }
 
-void setVoltage(char a, int v) {
-    unsigned short t = 0; //t is 16 bits, represents voltage value
+void setVoltage(char channel, int voltage) {
+    unsigned short v = 0; // v is 16 bits, represents DAC value
     
-}
+    v = channel << 15;                        // set bit 15: which out (A or B) to use
+    v |= 0b0111000000000000;                  // set bits 14-12: buffered, gain = 1, no shutdown
+    v |= ((voltage & 0b1111111111) << 2);     // set bits 11-2: 10-bit voltage value
+                                              // (last 2 bits of MCP4912 are N/A)
+    
+    CS = 0;         // begin command to DAC
+    spi_io(v>>8);   // first byte (first half)
+    spi_io(v<<8);   // second byte (second half)
+    CS = 1;         // end command
+}   
+
+/* (2) function that makes sin wave
+ * (3) functions that converts dec to binary & letter (A/B) to value (0/1)*/
