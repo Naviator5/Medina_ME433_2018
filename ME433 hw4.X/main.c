@@ -65,17 +65,36 @@ int main(void) {
     spi_init();
     __builtin_enable_interrupts();
 
-    int i = 0; 
+    int i = 0;        // counter variable 
+    float val = 0.0;  // value variable for triangle wave
     
     while(1) {
         _CP0_SET_COUNT(0);
-       
-        /*float f = 512.0 + 512.0*sin((i*2.0*3.14/1000.0)*10.0);
-        i++;*/
+        // sin wave, period = 100 ms (10 Hz)
+        float sine = 512.0 + 512.0*sin((i*2.0*3.14/1000.0)*10.0); // for first run (i = 0), f = 512 
+                                                                  // --> wave starts at 1.65V 
+                                                                  // as long as i is multiple of 100, it doesn't matter
+                                                                  // (sin(10s*2pi) = sin(2pi))
         
-        setVoltage(0,512); // test: 1.65 V on Channel A
+        // triangle wave, period = 200 ms (5 Hz)
+        float tri = 0.0 + (1023.0/100.0)*val;
+        if (i<100.0) {
+            val = val + 1.0;
+        } else if (100.0<=i && i<200.0) {
+            val = val - 1.0;
+        } else if (i == 200.0) {
+            val = 0.0;
+            tri = 0.0;
+        }
         
-        while(_CP0_GET_COUNT() < 48000) {;} // wait 1 ms
+        i++;
+        if (i == 200) {i = 0;}
+        
+        // send sin wave to channel A and triangle wave to channel B
+        setVoltage(0,sine); 
+        setVoltage(1,tri);
+                
+        while(_CP0_GET_COUNT() < 24000) {;} // wait 1 ms to get 1 kHz desired sampling rate
     }
     return 0;
 }
@@ -125,6 +144,3 @@ void setVoltage(char channel, int voltage) {
     spi_io(v<<8);   // second byte (second half)
     CS = 1;         // end command
 }   
-
-/* (2) function that makes sin wave
- * (3) functions that converts dec to binary & letter (A/B) to value (0/1)*/
