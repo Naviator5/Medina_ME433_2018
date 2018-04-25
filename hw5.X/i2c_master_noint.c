@@ -6,9 +6,13 @@
 // I2C pins need pull-up resistors, 2k-10k
 
 void i2c_master_setup(void) {
-  I2C2BRG = 53;        // I2CxBRG = [1/(2*400000) - (100E-9)]*48000000 - 2 = 53.2
-                       // (let PGD = 100 ns, desired Fsck = 400 kHz; PB = 48M)
-  I2C2CONbits.ON = 1;  // turn on I2C2 module
+  // turn off I2C2 analog
+  ANSELBbits.ANSB2 = 0;
+  ANSELBbits.ANSB3 = 0;
+  
+  I2C2BRG = 53;         // I2CxBRG = [1/(2*400000) - (100E-9)]*48000000 - 2 = 53.2
+                        // (let PGD = 100 ns, desired Fsck = 400 kHz; PB = 48M)
+  I2C2CONbits.ON = 1;   // turn on I2C2 module
 }
 
 // Start a transmission on the I2C bus
