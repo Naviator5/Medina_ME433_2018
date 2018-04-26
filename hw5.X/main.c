@@ -40,8 +40,8 @@
 
 /* Helper Function Prototypes */
 void initExpander(void);       // initialize the MCP23008
-void setExpander(char, char);  // set an output pin
-//char getExpander(void);      // read input pins
+//void setExpander(char, char);  // set an output pin
+char getExpander(void);      // read input pins
 
 
 /* Main Function */
@@ -63,15 +63,14 @@ int main(void) {
     __builtin_enable_interrupts();
     
     while(1) {
-        // blinking green LED to serve as comm check 
+        /* blinking green LED to serve as comm check 
         _CP0_SET_COUNT(0);
         LATAbits.LATA4 = !LATAbits.LATA4; 
         while(_CP0_GET_COUNT() < 24000) {;} 
         LATAbits.LATA4 = !LATAbits.LATA4; 
-        while(_CP0_GET_COUNT() < 48000) {;} 
-    
-        //setExpander(0,1); // test: turn on LED (set GP0 high) 
-        /* if(getExpander() == 0x00) {setExpander(0,1);} else {setExpander(0,0);}*/
+        while(_CP0_GET_COUNT() < 48000) {;} */
+     
+        if(getExpander() == 0x00) {LATAbits.LATA4 = 1;} else {LATAbits.LATA4 = 0;}
     }
     return 0;
 }
@@ -90,11 +89,11 @@ void initExpander() {
     i2c_master_start();
     i2c_master_send((0b0100101 << 1) | 0); // chip address
     i2c_master_send(0x0A); // OLAT register
-    i2c_master_send(0x01); // test: turn on LED by default
+    i2c_master_send(0x00); // set low by default
     i2c_master_stop();
 }
 
-void setExpander(char pin, char level) {
+/*void setExpander(char pin, char level) {
     // choose desired pin
     unsigned short p = 0;
     p = level << pin; // this will take level (1 or 0) and shift it to the proper position
@@ -105,9 +104,9 @@ void setExpander(char pin, char level) {
     i2c_master_send(0x0A); // OLAT register
     i2c_master_send(p); 
     i2c_master_stop();
-}
+}*/
 
-/*char getExpander() {
+char getExpander() {
     char val = 0;
     
     i2c_master_start();
@@ -118,4 +117,6 @@ void setExpander(char pin, char level) {
     val = i2c_master_recv();
     i2c_master_ack(1);
     i2c_master_stop();
-}*/
+    
+    return val;
+}
