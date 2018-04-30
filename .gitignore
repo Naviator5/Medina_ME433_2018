@@ -58,3 +58,6 @@ dkms.conf
 /ME433 hw4.X/dist/default/
 /hw5.X/nbproject/private/
 /hw5.X/dist/default/
+/hw6.X/nbproject/private/
+/hw6.X/build/default/
+/hw6.X/dist/default/
