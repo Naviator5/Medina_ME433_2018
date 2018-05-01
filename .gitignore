@@ -62,3 +62,5 @@ dkms.conf
 /hw6.X/build/default/
 /hw6.X/dist/default/
 /hw7.X/nbproject/private/
+/hw7.X/build/default/
+/hw7.X/dist/default/

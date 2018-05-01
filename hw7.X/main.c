@@ -2,6 +2,7 @@
 #include "i2c_master_noint.h"
 #include <stdio.h>
 #include "ST7735.h"
+#include <math.h>
 
 #define LSM6DS33 0b1101011 // chip address
 
@@ -50,31 +51,27 @@ void i2c_read_multiple(unsigned char, unsigned char, unsigned char *, int);
 /* Main Function */
 int main(void) {
     __builtin_disable_interrupts();
-    // set the CP0 CONFIG register to indicate that kseg0 is cacheable (0x3)
-    __builtin_mtc0(_CP0_CONFIG, _CP0_CONFIG_SELECT, 0xa4210583); 
-    // 0 data RAM access wait states
-    BMXCONbits.BMXWSDRM = 0x0;
-    // enable multi vector interrupts
-    INTCONbits.MVEC = 0x1;
-    // disable JTAG to get pins back
-    DDPCONbits.JTAGEN = 0;
-
-    i2c_master_setup();            // set up I2C2 as master, at 400 kHz
-    IMU_init();                    // initialize LSM6DS33
-    LCD_init();                    // initialize LCD/SPI communication
-    TRISAbits.TRISA4 = 0;          // set up green LED heartbeat check
+    __builtin_mtc0(_CP0_CONFIG, _CP0_CONFIG_SELECT, 0xa4210583); // CP0 CONFIG register: kseg0 is cacheable (0x3)
+    BMXCONbits.BMXWSDRM = 0x0;                                   // 0 data RAM access wait states
+    INTCONbits.MVEC = 0x1;                                       // enable multi vector interrupts
+    DDPCONbits.JTAGEN = 0;                                       // disable JTAG to get pins back
+    i2c_master_setup();                                          // set up I2C2 as master, at 400 kHz
+    IMU_init();                                                  // initialize LSM6DS33
+    LCD_init();                                                  // initialize LCD/SPI communication
+    TRISAbits.TRISA4 = 0;                                        // set up green LED heartbeat check
     LATAbits.LATA4 = 0;   
     __builtin_enable_interrupts();
     
+    // define data array and LCD string
+    unsigned char imudata[14];
+    char lcd[30];
+    
     // setup LCD
     LCD_clearScreen(BLACK);
-    drawProgressBar(62,40,120,4,BLUE,0,WHITE);
-    drawProgressBar(6,100,4,116,BLUE,0,WHITE);
-    
-    // define data arrays and string
-    unsigned char *imudata[14];
-    unsigned int IMU[14];
-    char lcd[30];
+    drawHorizontalProgressBar(64,100,4,60,0,WHITE,60,MAGENTA);
+    drawHorizontalProgressBar(4,100,4,60,0,WHITE,60,MAGENTA);
+    drawVerticalProgressBar(62,40,4,60,0,WHITE,60,MAGENTA);
+    drawVerticalProgressBar(62,100,4,60,0,WHITE,60,MAGENTA);
     
     // IMU WHOAMI check
     i2c_master_start();
@@ -82,35 +79,48 @@ int main(void) {
     i2c_master_send(0x0F); // WHOAMI register
     i2c_master_restart();
     i2c_master_send((LSM6DS33 << 1) | 1); // master is reading
-    char whoami = i2c_master_recv();
+    int whoami = (int) i2c_master_recv();
     i2c_master_ack(1);
     i2c_master_stop();
-    sprintf(lcd,"WHOAMI = %c",whoami);
+    sprintf(lcd,"WHOAMI = %d",whoami);
     drawString(10,10,lcd,WHITE,BLACK);
     
     while(1) {
-        // green LED heartbeat
         _CP0_SET_COUNT(0);
-        LATAbits.LATA4 = !LATAbits.LATA4; 
-        while(_CP0_GET_COUNT() < 24000) {;} 
-        LATAbits.LATA4 = !LATAbits.LATA4; 
-        while(_CP0_GET_COUNT() < 48000) {;} 
+        LATAbits.LATA4 = !LATAbits.LATA4; // green LED heartbeat
      
         // get data and convert to shorts
-        i2c_read_multiple(LSM6DS33,0x20,imudata,14); 
-        IMU[0] = (imudata[0] << 8) | imudata[1];   // temperature
-        IMU[1] = (imudata[2] << 8) | imudata[3];   // gyroX
-        IMU[2] = (imudata[4] << 8) | imudata[5];   // gyroY
-        IMU[3] = (imudata[6] << 8) | imudata[7];   // gyroZ
-        IMU[4] = (imudata[8] << 8) | imudata[9];   // accelX
-        IMU[5] = (imudata[10] << 8) | imudata[11]; // accelY
-        IMU[6] = (imudata[12] << 8) | imudata[13]; // accelZ
+        i2c_read_multiple(LSM6DS33,0x20,imudata,14); // 0x20 = temp_L register
+        signed short temperature = (imudata[1] << 8) | imudata[0];   
+        signed short gyroX = (imudata[3] << 8) | imudata[2];   
+        signed short gyroY = (imudata[5] << 8) | imudata[4];   
+        signed short gyroZ = (imudata[7] << 8) | imudata[6];   
+        signed short accelX = (imudata[9] << 8) | imudata[8];   
+        signed short accelY = (imudata[11] << 8) | imudata[10]; 
+        signed short accelZ = (imudata[13] << 8) | imudata[12]; 
         
         // print data to LCD
-        sprintf(lcd,"AX = %d",IMU[4]);
+        sprintf(lcd,"AX = %d   ",accelX);
         drawString(10,20,lcd,WHITE,BLACK);
-        sprintf(lcd,"AY = %d",IMU[5]);
+        sprintf(lcd,"AY = %d   ",accelY);
         drawString(10,30,lcd,WHITE,BLACK); 
+        
+        // active LCD display (with progress bars)
+        float pcntX = abs(accelX)/16000.0;  // put into % with respect to drawn bars (max in one direction = 16000 counts)
+        float pcntY = abs(accelY)/16000.0;  // floats needed so that numbers less than 1 don't get rounded up/down
+        
+        if (accelX < 0) {
+            drawHorizontalProgressBar(64,100,4,60,pcntX*60,WHITE,60-(pcntX*60),MAGENTA); // right bar, fills left --> right
+        } else if (accelX > 0) {
+            drawHorizontalProgressBar(4,100,4,60,60-(pcntX*60),MAGENTA,pcntX*60,WHITE);  // left bar, fills right --> left 
+        } else {Nop();}
+        if (accelY > 0) {
+            drawVerticalProgressBar(62,40,4,60,60-(pcntY*60),MAGENTA,pcntY*60,WHITE);    // top bar, fills bottom --> top 
+        } else if (accelY < 0) {
+            drawVerticalProgressBar(62,100,4,60,pcntY*60,WHITE,60-(pcntY*60),MAGENTA);   // bottom bar, fills top --> bottom
+        } else {Nop();}
+        
+        while(_CP0_GET_COUNT() < 1200000) {Nop();} // update speed = 20 Hz
     }
     return 0;
 }

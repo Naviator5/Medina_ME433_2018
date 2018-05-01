@@ -278,9 +278,9 @@ void drawString(unsigned short x, unsigned short y, char *message, \
     }
 }
 
-void drawProgressBar(unsigned short x, unsigned short y, unsigned short h, \
- unsigned short len1, unsigned short color1, unsigned short len2, unsigned short color2) {
-    // make background for bar (across, then down)
+void drawHorizontalProgressBar(unsigned short x, unsigned short y, unsigned short h, unsigned short \
+ barlength, unsigned short len1, unsigned short color1, unsigned short len2, unsigned short color2) {
+    // make progress bar that fills iteratively across
     int i = 0, j = 0;
     
     // this part controls the color that fills the bar (when i = 0, bar is all background)
@@ -293,8 +293,27 @@ void drawProgressBar(unsigned short x, unsigned short y, unsigned short h, \
     // this part controls the background color
     for (j = 0; j <= h; j++) {
         for (i = 0; i <= len2; i++) {
-            LCD_drawPixel((x+100)-i,y+j,color2); 
+            LCD_drawPixel((x+barlength)-i,y+j,color2); 
         }
-    }      
+    }         
+}
+
+void drawVerticalProgressBar(unsigned short x, unsigned short y, unsigned short len, unsigned short \
+ barlength, unsigned short h1, unsigned short color1, unsigned short h2, unsigned short color2) {
+    // make progress bar that fills iteratively down
+    int i = 0, j = 0;
     
+    // filling the bar
+    for (i = 0; i <= len; i++) { 
+        for (j = 0; j <= h1; j++) {
+            LCD_drawPixel(x+i,y+j,color1);
+        }
+    }
+    
+    // background color
+    for (i = 0; i <= len; i++) {
+        for (j = 0; j <= h2; j++) {
+            LCD_drawPixel(x+i,(y+barlength)-j,color2); 
+        }
+    }
 }

@@ -177,7 +177,9 @@ void LCD_clearScreen(unsigned short); // set the color of every pixel
 
 void drawString(unsigned short, unsigned short, char *, unsigned short, unsigned short);
 void drawChar(unsigned short, unsigned short, char, unsigned short, unsigned short); 
-void drawProgressBar(unsigned short, unsigned short, unsigned short, \
- unsigned short, unsigned short, unsigned short, unsigned short);
+void drawHorizontalProgressBar(unsigned short, unsigned short, unsigned short, unsigned short, \
+ unsigned short, unsigned short, unsigned short, unsigned short); // draws bar ACROSS
+void drawVerticalProgressBar(unsigned short, unsigned short, unsigned short, unsigned short, \
+ unsigned short, unsigned short, unsigned short, unsigned short); // drawds bar UP/DOWN
 
 #endif
