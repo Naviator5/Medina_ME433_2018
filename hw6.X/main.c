@@ -41,13 +41,6 @@
 #pragma config FVBUSONIO = ON // USB BUSON controlled by USB module
 
 
-/* Function Prototypes */
-void drawString(unsigned short, unsigned short, char *, unsigned short, unsigned short);
-void drawChar(unsigned short, unsigned short, char, unsigned short, unsigned short); 
-void drawProgressBar(unsigned short, unsigned short, unsigned short, \
- unsigned short, unsigned short, unsigned short, unsigned short);
-
-
 /* Main Function */
 int main(void) {
     __builtin_disable_interrupts();
@@ -88,57 +81,4 @@ int main(void) {
         while(_CP0_GET_COUNT() < 2400000) {Nop();} // update speed = 10 Hz
     }
     return 0;
-}
-
-
-/* Helper Functions */
-void drawChar(unsigned short x, unsigned short y, char message, \
- unsigned short color1, unsigned short color2) { 
-    char row = message - 0x20; // variables for rows and columns of ASCII array
-    int col = 0;
-    
-    // loop through array 
-    for(col = 0; col < 5; col++) {
-        char pixels = ASCII[row][col];
-        int j = 0;
-        
-        for(j = 0; j < 8; j++) {
-            if ((x+col) < 128 && (y+j) < 160) {    // condition to remain on 128x160 screen
-                if ( ((pixels >> j) & 1) == 1) {   // if = 1, fill in the pixel w character color
-                LCD_drawPixel(x+col, y+j, color1);
-                } else {LCD_drawPixel(x+col, y+j, color2);} // otherwise leave as background color
-            }
-        }
-    }
-}
-
-void drawString(unsigned short x, unsigned short y, char *message, \
- unsigned short color1, unsigned short color2) {
-    int i = 0;
-    
-    while (message[i]) {
-        drawChar(x+(i*5), y, message[i], color1, color2);
-        i++;
-    }
-}
-
-void drawProgressBar(unsigned short x, unsigned short y, unsigned short h, \
- unsigned short len1, unsigned short color1, unsigned short len2, unsigned short color2) {
-    // make background for bar (across, then down)
-    int i = 0, j = 0;
-    
-    // this part controls the color that fills the bar (when i = 0, bar is all background)
-    for (j = 0; j <= h; j++) { 
-        for (i = 0; i <= len1; i++) {
-            LCD_drawPixel(x+i,y+j,color1);
-        }
-    }
-    
-    // this part controls the background color
-    for (j = 0; j <= h; j++) {
-        for (i = 0; i <= len2; i++) {
-            LCD_drawPixel((x+100)-i,y+j,color2); 
-        }
-    }      
-    
 }
