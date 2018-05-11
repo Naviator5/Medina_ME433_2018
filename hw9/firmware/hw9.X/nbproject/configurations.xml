@@ -22,6 +22,10 @@
           </logicalFolder>
         </logicalFolder>
         <itemPath>../src/app.h</itemPath>
+        <itemPath>../src/i2c_master_noint.c</itemPath>
+        <itemPath>../src/i2c_master_noint.h</itemPath>
+        <itemPath>../src/ST7735.c</itemPath>
+        <itemPath>../src/ST7735.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="framework" projectFiles="true">
         <logicalFolder name="f1" displayName="driver" projectFiles="true">

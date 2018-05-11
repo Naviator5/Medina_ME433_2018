@@ -1,45 +1,3 @@
-/*******************************************************************************
-  MPLAB Harmony Application Source File
-  Company:
-    Microchip Technology Inc.
-  File Name:
-    app.c
-  Summary:
-    This file contains the source code for the MPLAB Harmony application.
-  Description:
-    This file contains the source code for the MPLAB Harmony application.  It
-    implements the logic of the application's state machine and it may call
-    API routines of other MPLAB Harmony modules in the system, such as drivers,
-    system services, and middleware.  However, it does not call any of the
-    system interfaces (such as the "Initialize" and "Tasks" functions) of any of
-    the modules in the system or make any assumptions about when those functions
-    are called.  That is the responsibility of the configuration-specific system
-    files.
- *******************************************************************************/
-
-// DOM-IGNORE-BEGIN
-/*******************************************************************************
-Copyright (c) 2013-2014 released Microchip Technology Inc.  All rights reserved.
-Microchip licenses to you the right to use, modify, copy and distribute
-Software only when embedded on a Microchip microcontroller or digital signal
-controller that is integrated into your product or third party product
-(pursuant to the sublicense terms in the accompanying license agreement).
-You should refer to the license agreement accompanying this Software for
-additional information regarding your rights and obligations.
-SOFTWARE AND DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
-EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
-MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
-IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
-CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
-OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
-INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
-CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
-SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
-(INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
- *******************************************************************************/
-// DOM-IGNORE-END
-
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
@@ -56,9 +14,12 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
+#define LSM6DS33 0b1101011
+
 uint8_t APP_MAKE_BUFFER_DMA_READY dataOut[APP_READ_BUFFER_SIZE];
 uint8_t APP_MAKE_BUFFER_DMA_READY readBuffer[APP_READ_BUFFER_SIZE];
 int len, i = 0;
+int dataFlag = 0;  // check for if 'r' was received
 int startTime = 0; // to remember the loop time
 
 // *****************************************************************************
@@ -208,7 +169,7 @@ void APP_USBDeviceEventHandler(USB_DEVICE_EVENT event, void * eventData, uintptr
 
         case USB_DEVICE_EVENT_CONFIGURED:
 
-            /* Check the configuratio. We only support configuration 1 */
+            /* Check the configuration. We only support configuration 1 */
             configuredEventData = (USB_DEVICE_EVENT_DATA_CONFIGURED*) eventData;
             if (configuredEventData->configurationValue == 1) {
                 /* Update LED to show configured state */
@@ -329,7 +290,34 @@ void APP_Initialize(void) {
     appData.readBuffer = &readBuffer[0];
 
     /* PUT YOUR LCD, IMU, AND PIN INITIALIZATIONS HERE */
-
+    //initializations
+    BMXCONbits.BMXWSDRM = 0x0;                                   // 0 data RAM access wait states
+    INTCONbits.MVEC = 0x1;                                       // enable multi vector interrupts
+    DDPCONbits.JTAGEN = 0;                                       // disable JTAG to get pins back
+    i2c_master_setup();                                          // set up I2C2 as master, at 400 kHz
+    IMU_init();                                                  // initialize LSM6DS33
+    LCD_init();                                                  // initialize LCD/SPI communication
+    TRISAbits.TRISA4 = 0;                                        // set up green LED heartbeat check
+    LATAbits.LATA4 = 0;   
+    
+    // setup LCD
+    LCD_clearScreen(BLACK);
+    
+    //IMU WHOAMI check
+    char lcd[30];
+    i2c_master_start();
+    i2c_master_send((LSM6DS33 << 1) | 0); // notify via write
+    i2c_master_send(0x0F); // WHOAMI register
+    i2c_master_restart();
+    i2c_master_send((LSM6DS33 << 1) | 1); // master is reading
+    int whoami = (int) i2c_master_recv();
+    i2c_master_ack(1);
+    i2c_master_stop();
+    sprintf(lcd,"WHOAMI = %d",whoami);
+    drawString(10,10,lcd,WHITE,BLACK);
+    
+    
+    /* STARTTIME*/
     startTime = _CP0_GET_COUNT();
 }
 
@@ -394,6 +382,9 @@ void APP_Tasks(void) {
                         /* YOU COULD PUT AN IF STATEMENT HERE TO DETERMINE WHICH LETTER
                         WAS RECEIVED (USUALLY IT IS THE NULL CHARACTER BECAUSE NOTHING WAS
                       TYPED) */
+                if(appData.readBuffer[0] == 'r') {
+                    dataFlag = 1;
+                }
 
                 if (appData.readTransferHandle == USB_DEVICE_CDC_TRANSFER_HANDLE_INVALID) {
                     appData.state = APP_STATE_ERROR;
@@ -413,8 +404,8 @@ void APP_Tasks(void) {
             /* Check if a character was received or a switch was pressed.
              * The isReadComplete flag gets updated in the CDC event handler. */
 
-             /* WAIT FOR 5HZ TO PASS OR UNTIL A LETTER IS RECEIVED */
-            if (appData.isReadComplete || _CP0_GET_COUNT() - startTime > (48000000 / 2 / 5)) {
+             /* WAIT FOR 100 HZ TO PASS */
+            if (appData.isReadComplete || _CP0_GET_COUNT() - startTime > (48000000 / 2 / 400)) {
                 appData.state = APP_STATE_SCHEDULE_WRITE;
             }
 
@@ -437,22 +428,57 @@ void APP_Tasks(void) {
             /* PUT THE TEXT YOU WANT TO SEND TO THE COMPUTER IN dataOut
             AND REMEMBER THE NUMBER OF CHARACTERS IN len */
             /* THIS IS WHERE YOU CAN READ YOUR IMU, PRINT TO THE LCD, ETC */
-            len = sprintf(dataOut, "%d\r\n", i);
-            i++; // increment the index so we see a change in the text
-            /* IF A LETTER WAS RECEIVED, ECHO IT BACK SO THE USER CAN SEE IT */
+            LATAbits.LATA4 = !LATAbits.LATA4; // green LED heartbeat
+            
+            // define data array and LCD string
+            unsigned char imudata[14];
+            char lcd[30];
+            
+            // get data and convert to shorts
+            i2c_read_multiple(LSM6DS33,0x20,imudata,14); // 0x20 = temp_L register
+            signed short temperature = (imudata[1] << 8) | imudata[0];   
+            signed short gyroX = (imudata[3] << 8) | imudata[2];   
+            signed short gyroY = (imudata[5] << 8) | imudata[4];   
+            signed short gyroZ = (imudata[7] << 8) | imudata[6];   
+            signed short accelX = (imudata[9] << 8) | imudata[8];   
+            signed short accelY = (imudata[11] << 8) | imudata[10]; 
+            signed short accelZ = (imudata[13] << 8) | imudata[12]; 
+            
+            // print data to LCD
+            sprintf(lcd,"AX = %d   ",accelX);
+            drawString(10,20,lcd,WHITE,BLACK);
+            sprintf(lcd,"AY = %d   ",accelY);
+            drawString(10,30,lcd,WHITE,BLACK);
+            sprintf(lcd,"AZ = %d   ",accelZ);
+            drawString(10,40,lcd,WHITE,BLACK);
+            
+            // only send data if r is received (dataFlag = 1)
+            if (dataFlag == 1) {
+                len = sprintf(dataOut, "%d %d %d %d\r\n", i, accelX, accelY, accelZ);
+                i++; // increment the index so we see a change in the text
+                if (i == 100) {  // after 100 data points, stop sending data
+                    i = 0;
+                    dataFlag = 0;
+                }
+            } else {
+                len = 1;
+                dataOut[0] = 0;
+            }
+            
+            /* IF A LETTER WAS RECEIVED, ECHO IT BACK SO THE USER CAN SEE IT  
             if (appData.isReadComplete) {
                 USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
                         &appData.writeTransferHandle,
                         appData.readBuffer, 1,
                         USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
-            }
+            } */
             /* ELSE SEND THE MESSAGE YOU WANTED TO SEND */
-            else {
+            /* else { */
                 USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
                         &appData.writeTransferHandle, dataOut, len,
                         USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
                 startTime = _CP0_GET_COUNT(); // reset the timer for accurate delays
-            }
+            //}
             break;
 
         case APP_STATE_WAIT_FOR_WRITE_COMPLETE:
@@ -477,7 +503,47 @@ void APP_Tasks(void) {
     }
 }
 
+void IMU_init() {
+    // accelerometer init: 1.66 kHz sample rate, 2g sensitivity, 100 Hz anti-aliasing LPF
+    i2c_master_start();
+    i2c_master_send((0b1101011 << 1) | 0); // chip address
+    i2c_master_send(0x10); // CTRL1_XL register 
+    i2c_master_send(0b10000010);
+    i2c_master_stop();
+    
+    // gyroscope init: 1.66 kHz sample rate, 1000 dps sensitivity
+    i2c_master_start();
+    i2c_master_send((0b1101011 << 1) | 0); // chip address
+    i2c_master_send(0x11); // CTRL2_G register 
+    i2c_master_send(0b10001000);
+    i2c_master_stop();
+    
+    // CTRL3_C: make IF_INC = 1 to read multiple registers in a row w/o specifying every address
+    i2c_master_start();
+    i2c_master_send((0b1101011 << 1) | 0); // chip address
+    i2c_master_send(0x12); // CTRL3_C register 
+    i2c_master_send(0b00000100);
+    i2c_master_stop();
+}
 
+void i2c_read_multiple(unsigned char address, unsigned char reg, unsigned char *data, int length) {
+    // set register to read from 
+    i2c_master_start();
+    i2c_master_send((address << 1) | 0); // notify via write
+    i2c_master_send(reg); // 
+    i2c_master_restart();
+    
+    // loop to get all data
+    int i = 0;
+    i2c_master_send((address << 1) | 1); // master is reading
+    for (i = 0; i <= length-1; i++) {
+        data[i] = i2c_master_recv();
+        if (i < length-1) {
+            i2c_master_ack(0);      // not done getting all the data
+        } else {i2c_master_ack(1);} // done getting all data    
+    }
+    i2c_master_stop();
+}
 
 /*******************************************************************************
  End of File
