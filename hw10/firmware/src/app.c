@@ -19,7 +19,12 @@
 uint8_t APP_MAKE_BUFFER_DMA_READY dataOut[APP_READ_BUFFER_SIZE];
 uint8_t APP_MAKE_BUFFER_DMA_READY readBuffer[APP_READ_BUFFER_SIZE];
 int len, i = 0;
-int dataFlag = 0;  // check for if 'r' was received
+int rawdata[100], MAFdata[100], FIRdata[100], IIRdata[100]; // declare data arrays
+int ii = 0;
+int sum = 0;       // summation variable for MAF filter
+int j = 0;         // 2nd index variable for FIR filter
+float weights[6] = [0.0264, 0.1405, 0.3331, 0.3331, 0.1405, 0.0264]; // FIR weights
+int dataFlag = 0;
 int startTime = 0; // to remember the loop time
 
 // *****************************************************************************
@@ -383,7 +388,14 @@ void APP_Tasks(void) {
                         WAS RECEIVED (USUALLY IT IS THE NULL CHARACTER BECAUSE NOTHING WAS
                       TYPED) */
                 if(appData.readBuffer[0] == 'r') {
-                    dataFlag = 1;
+                    sum = 0;                        // reset MAF sum
+                    for (ii = 0; ii < 100; ii++) {
+                        rawdata[ii] = 0;
+                        MAFdata[ii] = 0;
+                        FIRdata[ii] = 0;
+                        IIRdata[ii] = 0;
+                    }
+                    dataFlag = 1;  // send data (after it's collected)
                 }
 
                 if (appData.readTransferHandle == USB_DEVICE_CDC_TRANSFER_HANDLE_INVALID) {
@@ -428,6 +440,7 @@ void APP_Tasks(void) {
             /* PUT THE TEXT YOU WANT TO SEND TO THE COMPUTER IN dataOut
             AND REMEMBER THE NUMBER OF CHARACTERS IN len */
             /* THIS IS WHERE YOU CAN READ YOUR IMU, PRINT TO THE LCD, ETC */
+            
             LATAbits.LATA4 = !LATAbits.LATA4; // green LED heartbeat
             
             // define data array and LCD string
@@ -452,10 +465,32 @@ void APP_Tasks(void) {
             sprintf(lcd,"AZ = %d   ",accelZ);
             drawString(10,40,lcd,WHITE,BLACK);
             
-            // only send data if r is received (dataFlag = 1)
+            
+            /* Filter accelZ data */
+            rawdata[i] = accelZ;
+            
+            // MAF
+            sum += rawdata[i];
+            MAFdata[i] = sum/(i+1);
+            
+            // FIR
+            for (j = 0; j < 6; j++) {
+                FIRdata[i] += weights[j]*rawdata[i-j];
+                if (i-j < 0) {
+                    rawdata[i-j] = 0;
+                }
+            }
+            
+            // IIR
+            if (i == 0) {rawdata[i-1] = 0;}
+            IIRdata[i] = 0.9*rawdata[i-1] + 0.1*rawdata[i];
+            if (i == 100) {rawdata[i] = IIRdata[i];}
+            
+            
+            /* Send Data to computer (only if 'r' is received, i.e. flag = 1) */
             if (dataFlag == 1) {
-                len = sprintf(dataOut, "%d %d %d %d\r\n", i, accelX, accelY, accelZ);
-                i++; // increment the index so we see a change in the text
+                len = sprintf(dataOut, "%d %d %d %d %d\r\n", i, accelZ, MAFdata[i], FIRdata[i], IIRdata[i]);
+                i++;             // increment the index 
                 if (i == 100) {  // after 100 data points, stop sending data
                     i = 0;
                     dataFlag = 0;
@@ -464,21 +499,13 @@ void APP_Tasks(void) {
                 len = 1;
                 dataOut[0] = 0;
             }
-            
-            /* IF A LETTER WAS RECEIVED, ECHO IT BACK SO THE USER CAN SEE IT  
-            if (appData.isReadComplete) {
-                USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
-                        &appData.writeTransferHandle,
-                        appData.readBuffer, 1,
-                        USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
-            } */
-            /* ELSE SEND THE MESSAGE YOU WANTED TO SEND */
-            /* else { */
-                USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
+            USB_DEVICE_CDC_Write(USB_DEVICE_CDC_INDEX_0,
                         &appData.writeTransferHandle, dataOut, len,
                         USB_DEVICE_CDC_TRANSFER_FLAGS_DATA_COMPLETE);
-                startTime = _CP0_GET_COUNT(); // reset the timer for accurate delays
-            //}
+            
+            
+            /* Reset Timer for accurate delays */
+            startTime = _CP0_GET_COUNT(); 
             break;
 
         case APP_STATE_WAIT_FOR_WRITE_COMPLETE:
