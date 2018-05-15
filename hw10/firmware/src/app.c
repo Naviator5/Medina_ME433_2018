@@ -23,7 +23,7 @@ int rawdata[100], MAFdata[100], FIRdata[100], IIRdata[100]; // declare data arra
 int ii = 0;
 int sum = 0;       // summation variable for MAF filter
 int j = 0;         // 2nd index variable for FIR filter
-float weights[6] = [0.0264, 0.1405, 0.3331, 0.3331, 0.1405, 0.0264]; // FIR weights
+float weights[6] = {0.0264, 0.1405, 0.3331, 0.3331, 0.1405, 0.0264}; // FIR weights
 int dataFlag = 0;
 int startTime = 0; // to remember the loop time
 
@@ -389,7 +389,7 @@ void APP_Tasks(void) {
                       TYPED) */
                 if(appData.readBuffer[0] == 'r') {
                     sum = 0;                        // reset MAF sum
-                    for (ii = 0; ii < 100; ii++) {
+                    for (ii = 0; ii < 100; ii++) {  // set arrays to 0
                         rawdata[ii] = 0;
                         MAFdata[ii] = 0;
                         FIRdata[ii] = 0;
@@ -469,21 +469,21 @@ void APP_Tasks(void) {
             /* Filter accelZ data */
             rawdata[i] = accelZ;
             
-            // MAF
+            // MAF: filtered data = summation(all data)/(# points)
             sum += rawdata[i];
             MAFdata[i] = sum/(i+1);
             
-            // FIR
+            // FIR: filtered data = summation(weights*data points)
             for (j = 0; j < 6; j++) {
-                FIRdata[i] += weights[j]*rawdata[i-j];
+                FIRdata[i] += weights[j]*rawdata[i-j]; 
                 if (i-j < 0) {
-                    rawdata[i-j] = 0;
+                    rawdata[i-j] = 0;   // for the first 6 points, some of the [i-j] points will be 0
                 }
             }
             
-            // IIR
-            if (i == 0) {rawdata[i-1] = 0;}
-            IIRdata[i] = 0.9*rawdata[i-1] + 0.1*rawdata[i];
+            // IIR: 2 weights - 1 for new data, 1 for old data
+            if (i == 0) {rawdata[i-1] = 0;}  // so that the computer isn't confused by [-1]
+            IIRdata[i] = 0.5*rawdata[i-1] + 0.5*rawdata[i];
             if (i == 100) {rawdata[i] = IIRdata[i];}
             
             
