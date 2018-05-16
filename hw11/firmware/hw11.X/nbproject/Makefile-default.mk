@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c ../src/app.c ../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c ../src/system_config/default/framework/system/devcon/src/sys_devcon.c ../src/system_config/default/framework/system/devcon/src/sys_devcon_pic32mx.c ../src/system_config/default/framework/system/ports/src/sys_ports_static.c ../src/system_config/default/system_init.c ../src/system_config/default/system_interrupt.c ../src/system_config/default/system_exceptions.c ../src/main.c ../src/system_config/default/system_tasks.c ../src/i2c_master_noint.c ../src/mouse.c
+SOURCEFILES_QUOTED_IF_SPACED=../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c ../src/system_config/default/framework/system/devcon/src/sys_devcon.c ../src/system_config/default/framework/system/devcon/src/sys_devcon_pic32mx.c ../src/system_config/default/framework/system/ports/src/sys_ports_static.c ../src/system_config/default/system_init.c ../src/system_config/default/system_interrupt.c ../src/system_config/default/system_exceptions.c ../src/system_config/default/system_tasks.c ../src/app.c ../src/main.c ../src/i2c_master_noint.c ../src/mouse.c ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c ../src/ST7735.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/323954350/sys_int_pic32.o ${OBJECTDIR}/_ext/310695378/drv_usbfs.o ${OBJECTDIR}/_ext/1330747775/usb_device.o ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o ${OBJECTDIR}/_ext/1360937237/app.o ${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o ${OBJECTDIR}/_ext/340578644/sys_devcon.o ${OBJECTDIR}/_ext/340578644/sys_devcon_pic32mx.o ${OBJECTDIR}/_ext/822048611/sys_ports_static.o ${OBJECTDIR}/_ext/1688732426/system_init.o ${OBJECTDIR}/_ext/1688732426/system_interrupt.o ${OBJECTDIR}/_ext/1688732426/system_exceptions.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/1688732426/system_tasks.o ${OBJECTDIR}/_ext/1360937237/i2c_master_noint.o ${OBJECTDIR}/_ext/1360937237/mouse.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d ${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d ${OBJECTDIR}/_ext/1330747775/usb_device.o.d ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d ${OBJECTDIR}/_ext/1360937237/app.o.d ${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o.d ${OBJECTDIR}/_ext/340578644/sys_devcon.o.d ${OBJECTDIR}/_ext/340578644/sys_devcon_pic32mx.o.d ${OBJECTDIR}/_ext/822048611/sys_ports_static.o.d ${OBJECTDIR}/_ext/1688732426/system_init.o.d ${OBJECTDIR}/_ext/1688732426/system_interrupt.o.d ${OBJECTDIR}/_ext/1688732426/system_exceptions.o.d ${OBJECTDIR}/_ext/1360937237/main.o.d ${OBJECTDIR}/_ext/1688732426/system_tasks.o.d ${OBJECTDIR}/_ext/1360937237/i2c_master_noint.o.d ${OBJECTDIR}/_ext/1360937237/mouse.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o ${OBJECTDIR}/_ext/340578644/sys_devcon.o ${OBJECTDIR}/_ext/340578644/sys_devcon_pic32mx.o ${OBJECTDIR}/_ext/822048611/sys_ports_static.o ${OBJECTDIR}/_ext/1688732426/system_init.o ${OBJECTDIR}/_ext/1688732426/system_interrupt.o ${OBJECTDIR}/_ext/1688732426/system_exceptions.o ${OBJECTDIR}/_ext/1688732426/system_tasks.o ${OBJECTDIR}/_ext/1360937237/app.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/1360937237/i2c_master_noint.o ${OBJECTDIR}/_ext/1360937237/mouse.o ${OBJECTDIR}/_ext/310695378/drv_usbfs.o ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o ${OBJECTDIR}/_ext/1330747775/usb_device.o ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o ${OBJECTDIR}/_ext/1360937237/ST7735.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o.d ${OBJECTDIR}/_ext/340578644/sys_devcon.o.d ${OBJECTDIR}/_ext/340578644/sys_devcon_pic32mx.o.d ${OBJECTDIR}/_ext/822048611/sys_ports_static.o.d ${OBJECTDIR}/_ext/1688732426/system_init.o.d ${OBJECTDIR}/_ext/1688732426/system_interrupt.o.d ${OBJECTDIR}/_ext/1688732426/system_exceptions.o.d ${OBJECTDIR}/_ext/1688732426/system_tasks.o.d ${OBJECTDIR}/_ext/1360937237/app.o.d ${OBJECTDIR}/_ext/1360937237/main.o.d ${OBJECTDIR}/_ext/1360937237/i2c_master_noint.o.d ${OBJECTDIR}/_ext/1360937237/mouse.o.d ${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d ${OBJECTDIR}/_ext/1330747775/usb_device.o.d ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d ${OBJECTDIR}/_ext/1360937237/ST7735.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/323954350/sys_int_pic32.o ${OBJECTDIR}/_ext/310695378/drv_usbfs.o ${OBJECTDIR}/_ext/1330747775/usb_device.o ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o ${OBJECTDIR}/_ext/1360937237/app.o ${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o ${OBJECTDIR}/_ext/340578644/sys_devcon.o ${OBJECTDIR}/_ext/340578644/sys_devcon_pic32mx.o ${OBJECTDIR}/_ext/822048611/sys_ports_static.o ${OBJECTDIR}/_ext/1688732426/system_init.o ${OBJECTDIR}/_ext/1688732426/system_interrupt.o ${OBJECTDIR}/_ext/1688732426/system_exceptions.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/1688732426/system_tasks.o ${OBJECTDIR}/_ext/1360937237/i2c_master_noint.o ${OBJECTDIR}/_ext/1360937237/mouse.o
+OBJECTFILES=${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o ${OBJECTDIR}/_ext/340578644/sys_devcon.o ${OBJECTDIR}/_ext/340578644/sys_devcon_pic32mx.o ${OBJECTDIR}/_ext/822048611/sys_ports_static.o ${OBJECTDIR}/_ext/1688732426/system_init.o ${OBJECTDIR}/_ext/1688732426/system_interrupt.o ${OBJECTDIR}/_ext/1688732426/system_exceptions.o ${OBJECTDIR}/_ext/1688732426/system_tasks.o ${OBJECTDIR}/_ext/1360937237/app.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/1360937237/i2c_master_noint.o ${OBJECTDIR}/_ext/1360937237/mouse.o ${OBJECTDIR}/_ext/310695378/drv_usbfs.o ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o ${OBJECTDIR}/_ext/1330747775/usb_device.o ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o ${OBJECTDIR}/_ext/1360937237/ST7735.o
 
 # Source Files
-SOURCEFILES=../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c ../src/app.c ../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c ../src/system_config/default/framework/system/devcon/src/sys_devcon.c ../src/system_config/default/framework/system/devcon/src/sys_devcon_pic32mx.c ../src/system_config/default/framework/system/ports/src/sys_ports_static.c ../src/system_config/default/system_init.c ../src/system_config/default/system_interrupt.c ../src/system_config/default/system_exceptions.c ../src/main.c ../src/system_config/default/system_tasks.c ../src/i2c_master_noint.c ../src/mouse.c
+SOURCEFILES=../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c ../src/system_config/default/framework/system/devcon/src/sys_devcon.c ../src/system_config/default/framework/system/devcon/src/sys_devcon_pic32mx.c ../src/system_config/default/framework/system/ports/src/sys_ports_static.c ../src/system_config/default/system_init.c ../src/system_config/default/system_interrupt.c ../src/system_config/default/system_exceptions.c ../src/system_config/default/system_tasks.c ../src/app.c ../src/main.c ../src/i2c_master_noint.c ../src/mouse.c ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c ../src/ST7735.c
 
 
 CFLAGS=
@@ -106,42 +106,6 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/_ext/323954350/sys_int_pic32.o: ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/323954350" 
-	@${RM} ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d 
-	@${RM} ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d" -o ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
-${OBJECTDIR}/_ext/310695378/drv_usbfs.o: ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/310695378" 
-	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d 
-	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d" -o ${OBJECTDIR}/_ext/310695378/drv_usbfs.o ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
-${OBJECTDIR}/_ext/1330747775/usb_device.o: ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1330747775" 
-	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1330747775/usb_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1330747775/usb_device.o.d" -o ${OBJECTDIR}/_ext/1330747775/usb_device.o ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
-${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o: ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/310695378" 
-	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d 
-	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d" -o ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
-${OBJECTDIR}/_ext/1330747775/usb_device_hid.o: ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1330747775" 
-	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d" -o ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
-${OBJECTDIR}/_ext/1360937237/app.o: ../src/app.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/app.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/app.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/app.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/app.o.d" -o ${OBJECTDIR}/_ext/1360937237/app.o ../src/app.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
 ${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o: ../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/639803181" 
 	@${RM} ${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o.d 
@@ -184,17 +148,23 @@ ${OBJECTDIR}/_ext/1688732426/system_exceptions.o: ../src/system_config/default/s
 	@${RM} ${OBJECTDIR}/_ext/1688732426/system_exceptions.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1688732426/system_exceptions.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1688732426/system_exceptions.o.d" -o ${OBJECTDIR}/_ext/1688732426/system_exceptions.o ../src/system_config/default/system_exceptions.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/_ext/1360937237/main.o: ../src/main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/main.o.d" -o ${OBJECTDIR}/_ext/1360937237/main.o ../src/main.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
 ${OBJECTDIR}/_ext/1688732426/system_tasks.o: ../src/system_config/default/system_tasks.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1688732426" 
 	@${RM} ${OBJECTDIR}/_ext/1688732426/system_tasks.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1688732426/system_tasks.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1688732426/system_tasks.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1688732426/system_tasks.o.d" -o ${OBJECTDIR}/_ext/1688732426/system_tasks.o ../src/system_config/default/system_tasks.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/1360937237/app.o: ../src/app.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/app.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/app.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/app.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/app.o.d" -o ${OBJECTDIR}/_ext/1360937237/app.o ../src/app.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/1360937237/main.o: ../src/main.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/main.o.d" -o ${OBJECTDIR}/_ext/1360937237/main.o ../src/main.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/1360937237/i2c_master_noint.o: ../src/i2c_master_noint.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
@@ -208,43 +178,43 @@ ${OBJECTDIR}/_ext/1360937237/mouse.o: ../src/mouse.c  nbproject/Makefile-${CND_C
 	@${RM} ${OBJECTDIR}/_ext/1360937237/mouse.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/mouse.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/mouse.o.d" -o ${OBJECTDIR}/_ext/1360937237/mouse.o ../src/mouse.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
-else
-${OBJECTDIR}/_ext/323954350/sys_int_pic32.o: ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/323954350" 
-	@${RM} ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d 
-	@${RM} ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d" -o ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
 ${OBJECTDIR}/_ext/310695378/drv_usbfs.o: ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/310695378" 
 	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d 
 	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d" -o ${OBJECTDIR}/_ext/310695378/drv_usbfs.o ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
-${OBJECTDIR}/_ext/1330747775/usb_device.o: ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1330747775" 
-	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1330747775/usb_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1330747775/usb_device.o.d" -o ${OBJECTDIR}/_ext/1330747775/usb_device.o ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d" -o ${OBJECTDIR}/_ext/310695378/drv_usbfs.o ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o: ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/310695378" 
 	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d 
 	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d" -o ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d" -o ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/323954350/sys_int_pic32.o: ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/323954350" 
+	@${RM} ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d 
+	@${RM} ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d" -o ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/1330747775/usb_device.o: ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1330747775" 
+	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1330747775/usb_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1330747775/usb_device.o.d" -o ${OBJECTDIR}/_ext/1330747775/usb_device.o ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o: ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1330747775" 
 	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d" -o ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d" -o ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/_ext/1360937237/app.o: ../src/app.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1360937237/ST7735.o: ../src/ST7735.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/app.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/app.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/app.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/app.o.d" -o ${OBJECTDIR}/_ext/1360937237/app.o ../src/app.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/ST7735.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/ST7735.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/ST7735.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -DPICkit3PlatformTool=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/ST7735.o.d" -o ${OBJECTDIR}/_ext/1360937237/ST7735.o ../src/ST7735.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
+else
 ${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o: ../src/system_config/default/framework/system/clk/src/sys_clk_pic32mx.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/639803181" 
 	@${RM} ${OBJECTDIR}/_ext/639803181/sys_clk_pic32mx.o.d 
@@ -287,17 +257,23 @@ ${OBJECTDIR}/_ext/1688732426/system_exceptions.o: ../src/system_config/default/s
 	@${RM} ${OBJECTDIR}/_ext/1688732426/system_exceptions.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1688732426/system_exceptions.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1688732426/system_exceptions.o.d" -o ${OBJECTDIR}/_ext/1688732426/system_exceptions.o ../src/system_config/default/system_exceptions.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
-${OBJECTDIR}/_ext/1360937237/main.o: ../src/main.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/main.o.d" -o ${OBJECTDIR}/_ext/1360937237/main.o ../src/main.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
-	
 ${OBJECTDIR}/_ext/1688732426/system_tasks.o: ../src/system_config/default/system_tasks.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1688732426" 
 	@${RM} ${OBJECTDIR}/_ext/1688732426/system_tasks.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1688732426/system_tasks.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1688732426/system_tasks.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1688732426/system_tasks.o.d" -o ${OBJECTDIR}/_ext/1688732426/system_tasks.o ../src/system_config/default/system_tasks.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/1360937237/app.o: ../src/app.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/app.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/app.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/app.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/app.o.d" -o ${OBJECTDIR}/_ext/1360937237/app.o ../src/app.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/1360937237/main.o: ../src/main.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/main.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/main.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/main.o.d" -o ${OBJECTDIR}/_ext/1360937237/main.o ../src/main.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
 ${OBJECTDIR}/_ext/1360937237/i2c_master_noint.o: ../src/i2c_master_noint.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
@@ -310,6 +286,42 @@ ${OBJECTDIR}/_ext/1360937237/mouse.o: ../src/mouse.c  nbproject/Makefile-${CND_C
 	@${RM} ${OBJECTDIR}/_ext/1360937237/mouse.o.d 
 	@${RM} ${OBJECTDIR}/_ext/1360937237/mouse.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/mouse.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/mouse.o.d" -o ${OBJECTDIR}/_ext/1360937237/mouse.o ../src/mouse.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/310695378/drv_usbfs.o: ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/310695378" 
+	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d 
+	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/310695378/drv_usbfs.o.d" -o ${OBJECTDIR}/_ext/310695378/drv_usbfs.o ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o: ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/310695378" 
+	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d 
+	@${RM} ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o.d" -o ${OBJECTDIR}/_ext/310695378/drv_usbfs_device.o ../../../../../../NU32/harmony/v2_05/framework/driver/usb/usbfs/src/dynamic/drv_usbfs_device.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/323954350/sys_int_pic32.o: ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/323954350" 
+	@${RM} ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d 
+	@${RM} ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/323954350/sys_int_pic32.o.d" -o ${OBJECTDIR}/_ext/323954350/sys_int_pic32.o ../../../../../../NU32/harmony/v2_05/framework/system/int/src/sys_int_pic32.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/1330747775/usb_device.o: ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1330747775" 
+	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1330747775/usb_device.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1330747775/usb_device.o.d" -o ${OBJECTDIR}/_ext/1330747775/usb_device.o ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/1330747775/usb_device_hid.o: ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1330747775" 
+	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1330747775/usb_device_hid.o.d" -o ${OBJECTDIR}/_ext/1330747775/usb_device_hid.o ../../../../../../NU32/harmony/v2_05/framework/usb/src/dynamic/usb_device_hid.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
+	
+${OBJECTDIR}/_ext/1360937237/ST7735.o: ../src/ST7735.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/ST7735.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/ST7735.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/ST7735.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -ffunction-sections -O1 -I"../src" -I"../src/system_config/default" -I"../src/default" -I"../../../../../../NU32/harmony/v2_05/framework" -I"../src/system_config/default/framework" -MMD -MF "${OBJECTDIR}/_ext/1360937237/ST7735.o.d" -o ${OBJECTDIR}/_ext/1360937237/ST7735.o ../src/ST7735.c    -DXPRJ_default=$(CND_CONF)  -no-legacy-libc  $(COMPARISON_BUILD) 
 	
 endif
 

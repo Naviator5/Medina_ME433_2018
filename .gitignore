@@ -72,3 +72,5 @@ dkms.conf
 /hw10/firmware/hw10.X/build/default/
 /hw10/firmware/hw10.X/dist/default/
 /hw11/firmware/hw11.X/nbproject/private/
+/hw11/firmware/hw11.X/dist/default/
+/hw11/firmware/hw11.X/build/default/

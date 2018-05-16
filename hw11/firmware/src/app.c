@@ -14,6 +14,10 @@
 // *****************************************************************************
 // *****************************************************************************
 
+#define LSM6DS33 0b1101011  // IMU address
+
+int i = 0;            // for sending data every other cycle (to make it not as jumpy)
+
 // *****************************************************************************
 /* Application Data
   Summary:
@@ -212,6 +216,30 @@ void APP_Initialize(void) {
     //appData.emulateMouse = true;
     appData.hidInstance = 0;
     appData.isMouseReportSendBusy = false;
+    
+    // other initializations
+    BMXCONbits.BMXWSDRM = 0x0;                                   // 0 data RAM access wait states
+    INTCONbits.MVEC = 0x1;                                       // enable multi vector interrupts
+    DDPCONbits.JTAGEN = 0;                                       // disable JTAG to get pins back
+    i2c_master_setup();                                          // set up I2C2 as master, at 400 kHz
+    IMU_init();                                                  // initialize LSM6DS33 
+    LCD_init();                                                  // initialize LCD/SPI communication
+    TRISAbits.TRISA4 = 0;                                        // set up green LED heartbeat check
+    LATAbits.LATA4 = 0;   
+    LCD_clearScreen(BLACK);
+    
+    // WHOAMI check
+    char lcd[30];
+    i2c_master_start();
+    i2c_master_send((LSM6DS33 << 1) | 0); // notify via write
+    i2c_master_send(0x0F); // WHOAMI register
+    i2c_master_restart();
+    i2c_master_send((LSM6DS33 << 1) | 1); // master is reading
+    int whoami = (int) i2c_master_recv();
+    i2c_master_ack(1);
+    i2c_master_stop();
+    sprintf(lcd,"WHOAMI = %d",whoami);
+    drawString(10,10,lcd,WHITE,BLACK);
 }
 
 /******************************************************************************
@@ -222,9 +250,10 @@ void APP_Initialize(void) {
  */
 
 void APP_Tasks(void) {
-    static int8_t vector = 0;
-    static uint8_t movement_length = 0;
-    int8_t dir_table[] = {-4, -4, -4, 0, 4, 4, 4, 0};
+    unsigned char imudata[14];           // IMU data array
+    signed short accelX = 0, accelY = 0; // x&y accelerometer data
+    static uint8_t incX = 0, incY = 0;   // scaled accelerometer data
+    char lcd[30];                        // for printing to LCD
 
     /* Check the application's current state. */
     switch (appData.state) {
@@ -261,16 +290,36 @@ void APP_Tasks(void) {
 
         case APP_STATE_MOUSE_EMULATE:
             
-            // every 50th loop, or 20 times per second
-            if (movement_length > 50) {
-                appData.mouseButton[0] = MOUSE_BUTTON_STATE_RELEASED;
-                appData.mouseButton[1] = MOUSE_BUTTON_STATE_RELEASED;
-                appData.xCoordinate = (int8_t) dir_table[vector & 0x07];
-                appData.yCoordinate = (int8_t) dir_table[(vector + 2) & 0x07];
-                vector++;
-                movement_length = 0;
-            }
+            // get x&y accelerometer data from IMU 
+            i2c_read_multiple(LSM6DS33,0x20,imudata,14); // 0x20 = temp_L register
+            accelX = (imudata[9] << 8) | imudata[8];   
+            accelY = (imudata[11] << 8) | imudata[10];
+            
+            // scale the accelerometer values for the computer screen
+            incX = accelX/200;
+            incY = accelY/200;
 
+            // print data to LCD (as a check)
+            sprintf(lcd,"AX = %d   ",incX);
+            drawString(10,20,lcd,WHITE,BLACK);
+            sprintf(lcd,"AY = %d   ",incY);
+            drawString(10,30,lcd,WHITE,BLACK);
+            
+            // every 50th loop, or 20 times per second (**reverse x&y from IMU**)
+            // send data every other cycle
+            appData.mouseButton[0] = MOUSE_BUTTON_STATE_RELEASED;
+            appData.mouseButton[1] = MOUSE_BUTTON_STATE_RELEASED;
+            i++;
+            if (i == 2) {                        
+                appData.xCoordinate = (int8_t) incY;
+                appData.yCoordinate = (int8_t) -incX;
+                i = 0;
+            } else {
+                appData.xCoordinate = (int8_t) 0;
+                appData.yCoordinate = (int8_t) 0;
+            }  
+
+            // Assemble & Send
             if (!appData.isMouseReportSendBusy) {
                 /* This means we can send the mouse report. The
                    isMouseReportBusy flag is updated in the HID Event Handler. */
@@ -308,7 +357,6 @@ void APP_Tasks(void) {
                             }
                         }
                     }
-
                 }
                 if (appData.isMouseReportSendBusy == true) {
                     /* Copy the report sent to previous */
@@ -321,9 +369,8 @@ void APP_Tasks(void) {
                             sizeof (MOUSE_REPORT));
                     appData.setIdleTimer = 0;
                 }
-                movement_length++;
             }
-
+          
             break;
 
         case APP_STATE_ERROR:
