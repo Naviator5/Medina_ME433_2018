@@ -22,13 +22,24 @@
             android:text="Nothing yet"
             android:id="@+id/cameraStatus"/>
 
-        // where the app thinks the line is
+        // detection of colors
         <SurfaceView
             android:id="@+id/surfaceview"
             android:layout_width="640px"
             android:layout_height="480px" />
 
-        // what the camera sees
+        // adjusting sensitivity (threshold)
+        <SeekBar
+            android:id="@+id/seek1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:progress="20"
+            android:secondaryProgress="20"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        // normal camera view
         <TextureView
             android:id="@+id/textureview"
             android:layout_width="640px"

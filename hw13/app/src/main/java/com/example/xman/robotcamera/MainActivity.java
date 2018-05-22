@@ -19,6 +19,7 @@ import android.view.TextureView;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import java.io.IOException;
 
@@ -28,7 +29,7 @@ import static android.graphics.Color.red;
 import static android.graphics.Color.rgb;
 
 
-public class MainActivity extends Activity implements TextureView.SurfaceTextureListener {
+public class MainActivity extends AppCompatActivity implements TextureView.SurfaceTextureListener {
     private Camera mCamera;
     private TextureView mTextureView;
     private SurfaceView mSurfaceView;
@@ -37,6 +38,7 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
     private Canvas canvas = new Canvas(bmp);
     private Paint paint1 = new Paint();
     private TextView mTextView;
+    SeekBar myControl;        // for slide-bar sensitivity
 
     static long prevtime = 0; // for FPS calculation
 
@@ -45,6 +47,7 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); // keeps the screen from turning off
 
+        myControl = (SeekBar) findViewById(R.id.seek1);
         mTextView = (TextView) findViewById(R.id.cameraStatus);
 
         // see if the app has permission to use the camera
@@ -65,6 +68,27 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
             mTextView.setText("no camera permissions");
         }
 
+        setMyControlListener();
+    }
+
+    public void setMyControlListener() {
+        myControl.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+            int progressChanged = 0;
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressChanged = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
     }
 
     public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
@@ -101,7 +125,7 @@ public class MainActivity extends Activity implements TextureView.SurfaceTexture
 
         final Canvas c = mSurfaceHolder.lockCanvas();
         if (c != null) {
-            int thresh = 0; // comparison value
+            int thresh = 20; // comparison value, determined by slider bar
             int[] pixels = new int[bmp.getWidth()]; // pixels[] is the RGBA data
             int startY = 200; // which row in the bitmap to analyze to read
             bmp.getPixels(pixels, 0, bmp.getWidth(), 0, startY, bmp.getWidth(), 1);
