@@ -14,8 +14,6 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#define LSM6DS33 0b1101011
-
 uint8_t APP_MAKE_BUFFER_DMA_READY dataOut[APP_READ_BUFFER_SIZE];
 uint8_t APP_MAKE_BUFFER_DMA_READY readBuffer[APP_READ_BUFFER_SIZE];
 int len, i = 0;    // message length and counter for comm loop

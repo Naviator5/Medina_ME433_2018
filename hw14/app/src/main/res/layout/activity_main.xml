@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="USB Connection Test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/textView01"
-        android:text="initial value "
+        android:text="Slider value displayed here"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -42,7 +42,7 @@
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Send slider value" />
+            android:text="Send slider value to PIC" />
 
         <TextView
             android:id="@+id/textView02"
